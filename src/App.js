@@ -29,15 +29,9 @@ export default class App extends Component {
     console.log("i");
   }
   render() {
-    const list = this.state.toDos.map(
-      (item, i) => {
-        return(<div>
-          <Item todo={item} index={i} key={i} />
-          <input value="x" type="button" onClick={this.handleDelete}></input>
-        </div>)
-
-      }
-    );
+    const list = this.state.toDos.map((item, i) => (
+      <Item todo={item} index={i} key={i} />
+    ));
     return (
       <div class="container">
         <h1 class="text-center m-3">Todo</h1>

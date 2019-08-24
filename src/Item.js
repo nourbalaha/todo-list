@@ -20,7 +20,7 @@ export default class Item extends Component {
       </div>
       <div class="col-sm-2">
         <input
-          class="btn btn-danger"
+          className="btn btn-danger"
           onClick={this.handleDelete}
           type="button"
           value="x"
