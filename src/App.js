@@ -6,7 +6,6 @@ export default class App extends Component {
     super(props);
     this.state = {
       toDo: "",
-      toDos: [],
       index: 0
     };
     this.handleChange = this.handleChange.bind(this);
@@ -20,8 +19,9 @@ export default class App extends Component {
   }
   handleClick(event) {
     event.preventDefault();
+    this.props.add(this.state.toDo);
     this.setState({
-      toDos: [...this.state.toDos, this.state.toDo],
+      // toDos: [...this.state.toDos, this.state.toDo],
       toDo: ""
     });
   }
@@ -29,7 +29,7 @@ export default class App extends Component {
     console.log("i");
   }
   render() {
-    const list = this.state.toDos.map((item, i) => (
+    const list = this.props.todos.map((item, i) => (
       <Item todo={item} index={i} key={i} />
     ));
     return (
