@@ -14,7 +14,9 @@ const todoReducer = (state = [], action) => {
     case DELETE_TODO:
       return [].concat(state.slice(0,action.index), state.slice(action.index+1))
     case EDIT_TODO:
-      return [].concat(state.slice(0,action.index), state.slice(action.index+1))
+      const newState = [...state];
+      newState.splice(action.index,1,action.todo);
+      return newState;
     default:
       return state
   }
