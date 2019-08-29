@@ -14,21 +14,18 @@ export default class Item extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
-  componentWillMount(){
-    console.log(this.state.input)
-  }
   handleChange (event) {
     this.setState({
       input: event.target.value
     })
   }
-  
-  handleKeyPress(event){
-    event.preventDefault();
-      this.props.edit(this.state.input,this.state.index);
-      this.setState({
-        disabled: true,
-      })
+
+  handleKeyPress (event) {
+    event.preventDefault()
+    this.props.edit(this.state.input, this.state.index)
+    this.setState({
+      disabled: true
+    })
   }
 
   handleEdit () {
@@ -45,11 +42,12 @@ export default class Item extends Component {
         <div className='col-lg-9'>
           <li className='list-group-item'>
             <form onSubmit={this.handleKeyPress}>
-            {' '}<input onChange={this.handleChange}
-              value={this.props.todos[this.props.index]}
-              style={{ border: 'none' }}
-              disabled={this.state.disabled}
-            />{' '}
+              {' '}<input
+                onChange={this.handleChange}
+                value={this.state.input}
+                style={{ border: 'none' }}
+                disabled={this.state.disabled}
+              />{' '}
             </form>
           </li>
         </div>
