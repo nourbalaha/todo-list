@@ -5,12 +5,15 @@ import App from './App'
 
 const ADD_TODO = 'ADD_TODO'
 const DELETE_TODO = 'DELETE_TODO'
+const EDIT_TODO = 'EDIT_TODO'
 
 const todoReducer = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
       return [...state, action.todo]
     case DELETE_TODO:
+      return [].concat(state.slice(0,action.index), state.slice(action.index+1))
+    case EDIT_TODO:
       return [].concat(state.slice(0,action.index), state.slice(action.index+1))
     default:
       return state
@@ -31,6 +34,14 @@ const deleteToDo = index => {
   }
 }
 
+const editToDo = (todo,index) => {
+  return {
+    type: EDIT_TODO,
+    index,
+    todo,
+  }
+}
+
 const store = createStore(todoReducer)
 
 const mapStateToProps = state => {
@@ -46,6 +57,9 @@ const mapDispatchToProps = dispatch => {
     },
     delete: function (index) {
       dispatch(deleteToDo(index))
+    },
+    edit: function (todo,index){
+      dispatch(editToDo(todo,index))
     }
   }
 }
