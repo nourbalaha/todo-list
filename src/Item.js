@@ -14,6 +14,9 @@ export default class Item extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
+  componentWillMount(){
+    console.log(this.state.input)
+  }
   handleChange (event) {
     this.setState({
       input: event.target.value
@@ -22,7 +25,6 @@ export default class Item extends Component {
   
   handleKeyPress(event){
     event.preventDefault();
-      console.log("pressed")
       this.props.edit(this.state.input,this.state.index);
       this.setState({
         disabled: true,
@@ -34,24 +36,24 @@ export default class Item extends Component {
   }
 
   handleDelete () {
-    this.props.delete(this.props.index)
+    this.props.delete(this.state.index)
   }
 
   render () {
     return (
-      <div class='row'>
-        <div class='col-sm-8'>
-          <li class='list-group-item'>
+      <div className='row'>
+        <div className='col-lg-9'>
+          <li className='list-group-item'>
             <form onSubmit={this.handleKeyPress}>
             {' '}<input onChange={this.handleChange}
-              value={this.state.input}
+              value={this.props.todos[this.props.index]}
               style={{ border: 'none' }}
               disabled={this.state.disabled}
             />{' '}
             </form>
           </li>
         </div>
-        <div class='col-sm-2'>
+        <div className='col-lg-2'>
           <input
             className='btn btn-info'
             onClick={this.handleEdit}
@@ -59,7 +61,7 @@ export default class Item extends Component {
             value='Edit'
           />
         </div>
-        <div class='col-sm-2'>
+        <div className='col-lg-1'>
           <input
             className='btn btn-danger'
             onClick={this.handleDelete}
