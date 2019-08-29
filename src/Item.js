@@ -6,7 +6,7 @@ export default class Item extends Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
   handleDelete(){
-    console.log(this.props.index);
+    this.props.delete(this.props.index);
   }
 
   render() {
