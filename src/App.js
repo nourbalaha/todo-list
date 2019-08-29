@@ -6,12 +6,9 @@ export default class App extends Component {
     super(props);
     this.state = {
       toDo: "",
-      toDos: [],
-      index: 0
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
   handleChange(event) {
     this.setState({
@@ -20,17 +17,14 @@ export default class App extends Component {
   }
   handleClick(event) {
     event.preventDefault();
+    this.props.add(this.state.toDo);
     this.setState({
-      toDos: [...this.state.toDos, this.state.toDo],
       toDo: ""
     });
   }
-  handleDelete(i) {
-    console.log("i");
-  }
   render() {
-    const list = this.state.toDos.map((item, i) => (
-      <Item todo={item} index={i} key={i} display={true} />
+    const list = this.props.todos.map((item, i) => (
+      <Item todo={item} index={i} key={i} delete={this.props.delete} edit={this.props.edit} todos={this.props.todos} />
     ));
     return (
       <div className="container">
