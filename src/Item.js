@@ -4,6 +4,7 @@ export default class Item extends Component {
   constructor (props) {
     super(props)
     this.state = {
+      todos: this.props.todos,
       index: this.props.index,
       input: this.props.todos[this.props.index],
       disabled: true
