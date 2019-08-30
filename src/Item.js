@@ -49,7 +49,7 @@ export default class Item extends Component {
     return (
         <Card border="dark" className="m-2">
           <Card.Header>
-            <span className="float-left">Todo {this.props.index+1}</span>
+            <span className="float-left"># {this.props.index+1}</span>
             <ButtonGroup className="float-right">
                 <Button variant='outline-info' onClick={this.handleEdit}>
                   Edit
