@@ -5,7 +5,6 @@ import {
   Container,
   Navbar
 } from "react-bootstrap";
-import "./App.css";
 import Item from "./Item";
 
 export default class App extends Component {
