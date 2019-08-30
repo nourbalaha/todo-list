@@ -5,7 +5,7 @@ export default class Item extends Component {
     super(props)
     this.state = {
       index: this.props.index,
-      input: this.props.todos[this.props.index],
+      input: this.props.todo,
       disabled: true
     }
     this.handleDelete = this.handleDelete.bind(this)
@@ -14,25 +14,26 @@ export default class Item extends Component {
     this.handleKeyPress = this.handleKeyPress.bind(this)
   }
 
-  componentWillMount(){
-    console.log(this.state.input)
-  }
   handleChange (event) {
     this.setState({
       input: event.target.value
     })
   }
-  
-  handleKeyPress(event){
-    event.preventDefault();
-      this.props.edit(this.state.input,this.state.index);
-      this.setState({
-        disabled: true,
-      })
+
+  handleKeyPress (event) {
+    event.preventDefault()
+    this.props.edit(this.state.input, this.state.index)
+    this.setState({
+      disabled: true,
+      input: this.props.todo
+    })
   }
 
   handleEdit () {
-    this.setState({ disabled: false })
+    this.setState({ 
+      input: this.props.todo,
+      disabled: false,
+    })
   }
 
   handleDelete () {
@@ -44,13 +45,15 @@ export default class Item extends Component {
       <div className='row'>
         <div className='col-lg-9'>
           <li className='list-group-item'>
-            <form onSubmit={this.handleKeyPress}>
-            {' '}<input onChange={this.handleChange}
-              value={this.props.todos[this.props.index]}
-              style={{ border: 'none' }}
-              disabled={this.state.disabled}
-            />{' '}
-            </form>
+            {this.state.disabled && <p>{this.props.todo}</p>}
+            {!this.state.disabled && <form onSubmit={this.handleKeyPress}>
+              <input
+                onChange={this.handleChange}
+                value={this.state.input}
+                style={{ border: 'none' }}
+                disabled={this.state.disabled}
+              />
+            </form>}
           </li>
         </div>
         <div className='col-lg-2'>
