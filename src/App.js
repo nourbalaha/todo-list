@@ -1,11 +1,18 @@
 import React, { Component } from "react";
+import {
+  Button,
+  Form,
+  Container,
+  Navbar
+} from "react-bootstrap";
 import "./App.css";
 import Item from "./Item";
+
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      toDo: "",
+      toDo: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -24,35 +31,38 @@ export default class App extends Component {
   }
   render() {
     const list = this.props.todos.map((item, i) => (
-      <Item todo={item} index={i} key={i} delete={this.props.delete} edit={this.props.edit} todos={this.props.todos} />
+      <Item
+        todo={item}
+        index={i}
+        key={i}
+        delete={this.props.delete}
+        edit={this.props.edit}
+        todos={this.props.todos}
+      />
     ));
     return (
-      <div className="container">
-        <h1 className="text-center m-3">Todo</h1>
-        <form onSubmit={this.handleClick}>
-          <div className="row">
-            <div className="col-sm-8">
-              <input
-                className="form-control"
-                type="text"
-                value={this.state.toDo}
-                onChange={this.handleChange}
-              />{" "}
-            </div>
-            <div className="col-sm-4">
-              <input
-                className="btn btn-primary btn-block"
-                type="submit"
-                value="add"
-              />{" "}
-            </div>
-          </div>{" "}
-        </form>
-        <div className="container mt-3">
-          <p className="text-center"> To Do List: </p>{" "}
-          <ul className="list-group"> {list} </ul>{" "}
-        </div>
-      </div>
+      <Container>
+        <Navbar bg="light" expand="xs" className="justify-content-between">
+          <Navbar.Brand>Todo List</Navbar.Brand>
+          <Form onSubmit={this.handleClick} inline>
+            <Form.Control
+              type="text"
+              placeholder="Add Todo"
+              className="mr-sm-2"
+              value={this.state.toDo}
+              onChange={this.handleChange}
+            />
+            <Button variant="outline-success" type="submit">
+              add
+            </Button>
+          </Form>
+        </Navbar>
+
+        <Container bg="dark">
+          <h5 className="text-center m-3"> Here is today's todo list: </h5>
+          <Container> {list} </Container>
+        </Container>
+      </Container>
     );
   }
 }

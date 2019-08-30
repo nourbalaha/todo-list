@@ -12,12 +12,15 @@ const todoReducer = (state = [], action) => {
     case ADD_TODO:
       return [...state, action.todo]
     case DELETE_TODO:
-      console.log([].concat(state.slice(0,action.index), state.slice(action.index+1)))
-      return [].concat(state.slice(0,action.index), state.slice(action.index+1))
+      return [].concat(
+        state.slice(0, action.index),
+        state.slice(action.index + 1)
+      )
     case EDIT_TODO:
-      const newState = [...state];
-      newState.splice(action.index,1,action.todo);
-      return newState;
+      return [].concat(
+        state.slice(0, action.index),action.todo,
+        state.slice(action.index + 1)
+      )
     default:
       return state
   }
@@ -37,11 +40,11 @@ const deleteToDo = index => {
   }
 }
 
-const editToDo = (todo,index) => {
+const editToDo = (todo, index) => {
   return {
     type: EDIT_TODO,
     index,
-    todo,
+    todo
   }
 }
 
@@ -61,9 +64,9 @@ const mapDispatchToProps = dispatch => {
     delete: function (index) {
       dispatch(deleteToDo(index))
     },
-    edit: function (todo,index){
-      dispatch(editToDo(todo,index))
-    }
+    edit: function (todo, index) {
+      dispatch(editToDo(todo, index))
+    },
   }
 }
 
