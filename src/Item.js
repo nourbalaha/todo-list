@@ -4,7 +4,6 @@ export default class Item extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      index: this.props.index,
       input: this.props.todo,
       disabled: true
     }
@@ -22,7 +21,7 @@ export default class Item extends Component {
 
   handleKeyPress (event) {
     event.preventDefault()
-    this.props.edit(this.state.input, this.state.index)
+    this.props.edit(this.state.input, this.props.index)
     this.setState({
       disabled: true,
       input: this.props.todo
@@ -37,7 +36,7 @@ export default class Item extends Component {
   }
 
   handleDelete () {
-    this.props.delete(this.state.index)
+    this.props.delete(this.props.index)
   }
 
   render () {

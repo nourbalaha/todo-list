@@ -25,7 +25,7 @@ export default class App extends Component {
   }
   render() {
     const list = this.props.todos.map((item, i) => (
-      <Item todo={item} index={i} key={i} delete={this.props.delete} edit={this.props.edit} refresh={this.props.refresh} todos={this.props.todos} />
+      <Item todo={item} index={i} key={i} delete={this.props.delete} edit={this.props.edit} todos={this.props.todos} />
     ));
     return (
       <div className="container">

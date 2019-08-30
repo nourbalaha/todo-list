@@ -6,7 +6,6 @@ import App from './App'
 const ADD_TODO = 'ADD_TODO'
 const DELETE_TODO = 'DELETE_TODO'
 const EDIT_TODO = 'EDIT_TODO'
-const REFRESH = 'REFRESH'
 
 const todoReducer = (state = [], action) => {
   switch (action.type) {
@@ -18,15 +17,10 @@ const todoReducer = (state = [], action) => {
         state.slice(action.index + 1)
       )
     case EDIT_TODO:
-      // const newState = [...state]
-      // newState.splice(action.index, 1, action.todo)
-      // return newState
       return [].concat(
         state.slice(0, action.index),action.todo,
         state.slice(action.index + 1)
       )
-    case REFRESH:
-      return [...state]
     default:
       return state
   }
@@ -53,11 +47,6 @@ const editToDo = (todo, index) => {
     todo
   }
 }
-const refresh = () => {
-  return {
-    type: REFRESH,
-  }
-}
 
 const store = createStore(todoReducer)
 
@@ -78,9 +67,6 @@ const mapDispatchToProps = dispatch => {
     edit: function (todo, index) {
       dispatch(editToDo(todo, index))
     },
-    refresh: function(){
-      dispatch(refresh())
-    }
   }
 }
 
