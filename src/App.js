@@ -42,8 +42,8 @@ export default class App extends Component {
     ));
     return (
       <Container>
-        <Navbar bg="light" expand="xs" className="justify-content-between">
-          <Navbar.Brand>Todo List</Navbar.Brand>
+        <Navbar bg="dark" variant="dark" expand="true" className="justify-content-between">
+          <Navbar.Brand variant="light">Todo List</Navbar.Brand>
           <Form onSubmit={this.handleClick} inline>
             <Form.Control
               type="text"
