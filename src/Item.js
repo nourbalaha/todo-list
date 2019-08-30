@@ -1,4 +1,13 @@
 import React, { Component } from 'react'
+import {
+  Button,
+  ButtonGroup,
+  Form,
+  ListGroup,
+  Col,
+  Row,
+  Card
+} from 'react-bootstrap'
 
 export default class Item extends Component {
   constructor (props) {
@@ -29,9 +38,9 @@ export default class Item extends Component {
   }
 
   handleEdit () {
-    this.setState({ 
+    this.setState({
       input: this.props.todo,
-      disabled: false,
+      disabled: false
     })
   }
 
@@ -41,37 +50,36 @@ export default class Item extends Component {
 
   render () {
     return (
-      <div className='row'>
-        <div className='col-lg-9'>
-          <li className='list-group-item'>
-            {this.state.disabled && <p>{this.props.todo}</p>}
-            {!this.state.disabled && <form onSubmit={this.handleKeyPress}>
-              <input
-                onChange={this.handleChange}
-                value={this.state.input}
-                style={{ border: 'none' }}
-                disabled={this.state.disabled}
-              />
-            </form>}
-          </li>
-        </div>
-        <div className='col-lg-2'>
-          <input
-            className='btn btn-info'
-            onClick={this.handleEdit}
-            type='button'
-            value='Edit'
-          />
-        </div>
-        <div className='col-lg-1'>
-          <input
-            className='btn btn-danger'
-            onClick={this.handleDelete}
-            type='button'
-            value='x'
-          />
-        </div>
-      </div>
+        <Card>
+          <Card.Header>
+            <span className="float-left">Todo {this.props.index+1}</span>
+            <ButtonGroup className="float-right">
+                <Button variant='sucess' onClick={this.handleEdit}>
+                  Edit
+                </Button>
+                <Button variant='danger' onClick={this.handleDelete}>
+                  x
+                </Button>
+              </ButtonGroup>
+            </Card.Header>
+          <Card.Body>
+            <Card.Title>
+            <Form onSubmit={this.handleKeyPress}>
+              {this.state.disabled &&
+                <Form.Text>
+                  {this.props.todo}
+                </Form.Text>}
+              {!this.state.disabled &&
+                <Form.Control
+                  onChange={this.handleChange}
+                  value={this.state.input}
+                  style={{ border: 'none' }}
+                  disabled={this.state.disabled}
+                />}
+            </Form>
+            </Card.Title>
+          </Card.Body>
+        </Card>
     )
   }
 }
